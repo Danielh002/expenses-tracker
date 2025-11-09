@@ -69,7 +69,7 @@ cd frontend && npm run lint
 
 ## Docker Images & ECS Handoff
 
-Use the helper script to build and push both images to ECR. `infra-expense-tracker` consumes the resulting image URIs via Terraform variables.
+Use the helper script to build and push both images to ECR. Infra [aws-ecs-fargate-terraform-api](https://github.com/Danielh002/aws-ecs-fargate-terraform-api?tab=readme-ov-file) consumes the resulting image URIs via Terraform variables.
 
 ```bash
 ./build_and_push.sh <aws-account-id> <aws-region> [image-tag]
@@ -77,7 +77,7 @@ Use the helper script to build and push both images to ECR. `infra-expense-track
 - Example: `./build_and_push.sh 123456789012 us-east-1 v0.1.0`
 - Update the Terraform variables (`backend_image`, `frontend_image`) in the infra repo with the pushed image tags.
 
-## Next Steps for infra-expense-tracker
+## Next Steps for Infra
 - Create two ECR repos: `fullstack-expense-tracker-backend` and `fullstack-expense-tracker-frontend`.
 - ECS task definitions reference the pushed images + expose ports 3000 (API) and 80 (web).
 - Pass `PORT`/`STAGE` env vars to the backend task and `VITE_API_URL` to the frontend build stage.
