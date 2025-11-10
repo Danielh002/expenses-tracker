@@ -23,10 +23,12 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const port = configService.get<number>('PORT', 3000);
   const frontendOrigin = configService.get<string>('frontendOrigin', 'http://localhost:5173');
+  const apiPrefix = configService.get<string>('API_PREFIX', 'api');
 
   app.enableCors({
     origin: frontendOrigin
   });
+  app.setGlobalPrefix(apiPrefix);
 
   await app.listen(port);
   logger.log(`API listening on port ${port}`);
