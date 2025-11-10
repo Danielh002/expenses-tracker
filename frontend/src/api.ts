@@ -1,8 +1,11 @@
 import axios from 'axios';
 import type { Expense } from './types';
 
+const fallbackBase =
+  typeof window !== 'undefined' ? `${window.location.origin}/api` : '/api';
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
+  baseURL: import.meta.env.VITE_API_URL || fallbackBase
 });
 
 export const fetchExpenses = async (): Promise<Expense[]> => {

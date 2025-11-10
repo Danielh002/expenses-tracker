@@ -23,10 +23,16 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const port = configService.get<number>('PORT', 3000);
   const frontendOrigin = configService.get<string>('frontendOrigin', 'http://localhost:5173');
+  const frontendOrigins =
+    configService.get<string>('FRONTEND_ORIGINS') ?? frontendOrigin;
+  const allowedOrigins = frontendOrigins
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter((origin) => origin.length > 0);
   const apiPrefix = configService.get<string>('API_PREFIX', 'api');
 
   app.enableCors({
-    origin: frontendOrigin
+    origin: allowedOrigins.length > 0 ? allowedOrigins : true
   });
   app.setGlobalPrefix(apiPrefix);
 
