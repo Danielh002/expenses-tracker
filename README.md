@@ -78,7 +78,7 @@ Use the helper script to build and push both images to ECR. Infra [aws-ecs-farga
 - Update the Terraform variables (`backend_image`, `frontend_image`) in the infra repo with the pushed image tags.
 
 ## Next Steps for Infra
-- Create two ECR repos: `fullstack-expense-tracker-backend` and `fullstack-expense-tracker-frontend`.
+- Create two ECR repos: `expense-tracker-backend` and `expense-tracker-frontend`.
 - ECS task definitions reference the pushed images + expose ports 3000 (API) and 80 (web).
 - Pass `PORT`/`STAGE` env vars to the backend task and `VITE_API_URL` to the frontend build stage.
 
