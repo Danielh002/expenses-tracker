@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { Expense } from './types';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000'
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
 });
 
 export const fetchExpenses = async (): Promise<Expense[]> => {
