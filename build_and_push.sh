@@ -15,9 +15,9 @@ FRONTEND_REPO="$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/expense-tracker-fronten
 
 aws ecr get-login-password --region "$REGION" | docker login --username AWS --password-stdin "$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com"
 
-docker build -t "$BACKEND_REPO:$TAG" backend
+docker buildx build --platform linux/amd64 -t "$BACKEND_REPO:$TAG" backend
 
-docker build -t "$FRONTEND_REPO:$TAG" frontend
+docker buildx build --platform linux/amd64 -t "$FRONTEND_REPO:$TAG" frontend
 
 for IMAGE in "$BACKEND_REPO:$TAG" "$FRONTEND_REPO:$TAG"; do
   docker push "$IMAGE"
