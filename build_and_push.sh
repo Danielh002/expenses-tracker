@@ -10,8 +10,8 @@ ACCOUNT_ID=$1
 REGION=$2
 TAG=${3:-$(git rev-parse --short HEAD)}
 
-BACKEND_REPO="$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/fullstack-expense-tracker-backend"
-FRONTEND_REPO="$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/fullstack-expense-tracker-frontend"
+BACKEND_REPO="$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/expense-tracker-backend"
+FRONTEND_REPO="$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/expense-tracker-frontend"
 
 aws ecr get-login-password --region "$REGION" | docker login --username AWS --password-stdin "$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com"
 
