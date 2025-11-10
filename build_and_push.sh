@@ -17,7 +17,8 @@ aws ecr get-login-password --region "$REGION" | docker login --username AWS --pa
 
 docker buildx build --platform linux/amd64 -t "$BACKEND_REPO:$TAG" backend
 
-docker buildx build --platform linux/amd64 -t "$FRONTEND_REPO:$TAG" frontend
+docker buildx build --platform linux/amd64 -t "$FRONTEND_REPO:$TAG" \
+  --build-arg VITE_API_URL= frontend
 
 for IMAGE in "$BACKEND_REPO:$TAG" "$FRONTEND_REPO:$TAG"; do
   docker push "$IMAGE"
